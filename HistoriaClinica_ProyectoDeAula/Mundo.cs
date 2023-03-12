@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HistoriaClinica_ProyectoDeAula
 {
@@ -12,12 +13,12 @@ namespace HistoriaClinica_ProyectoDeAula
         int semanasCotizadas;
         DateTime fechaIngreso;
         DateTime fechaIngresoEPS;
-        string EPS;
+        string EPS; 
         string historiaClinica;
         int cantidadEnfermedades;
         string enfermedadRelevante;
         string tipoAfiliacion;
-        int costosTratamientos;
+        double costosTratamientos;
 
         public Persona(int identificacion, 
             string nombre, 
@@ -32,7 +33,7 @@ namespace HistoriaClinica_ProyectoDeAula
             int cantidadEnfermedades, 
             string enfermedadRelevante, 
             string tipoAfiliacion, 
-            int costosTratamientos)
+            double costosTratamientos)
         {
             this.Identificacion = identificacion;
             this.Nombre = nombre;
@@ -63,7 +64,7 @@ namespace HistoriaClinica_ProyectoDeAula
         public int CantidadEnfermedades { get => cantidadEnfermedades; set => cantidadEnfermedades = value; }
         public string EnfermedadRelevante { get => enfermedadRelevante; set => enfermedadRelevante = value; }
         public string TipoAfiliacion { get => tipoAfiliacion; set => tipoAfiliacion = value; }
-        public int CostosTratamientos { get => costosTratamientos; set => costosTratamientos = value; }
+        public double CostosTratamientos { get => costosTratamientos; set => costosTratamientos = value; }
 
 
 
@@ -71,44 +72,61 @@ namespace HistoriaClinica_ProyectoDeAula
 
     public class Clinica
     {
-        public int calcularPorcentajePacienteSinEnfermedad()
+        List<Persona> listaDePacientes = new List<Persona>();
+
+        public List<Persona> ListaDePacientes { get => listaDePacientes; set => listaDePacientes = value; }
+
+
+        public void ingresarPaciente(Persona nuevoPaciente)
         {
-            return int;
+            ListaDePacientes.Add(nuevoPaciente);
+            
         }
 
-        public double calcularTotalCostosEPS()
+        public void CambiarEPS(Persona paciente, string nuevaEPS)
         {
-            return double;
+            paciente.EPS1 = nuevaEPS;
+        }
+        
+        public void calcularPorcentajePacienteSinEnfermedad()
+        {
+            
+        }
+
+        public void calcularTotalCostosEPS()
+        {
+            
         }
 
         public void cambiarEPS()
         {
 
         }
-        public double calcularPorcentajeCostosEPS()
+        public void calcularPorcentajeCostosEPS()
         {
-            return double;
+         
         }
-        public int calcularTotalPacientes()
+        public void calcularTotalPacientes()
         {
-            return int
+            
                 
         }
-        public double calcularPorcentajesPorEdad()
+        public void calcularPorcentajesPorEdad()
         {
-            return double;
+          
+            
         }
         public void encontrarMayorCosto()
         {
 
-        }
-        public double calcularPacientesPorRegimen()
+        }                
+        public void calcularPacientesPorRegimen()
         {
-            return double;
+          
         }
-        public double calcularPorcentajePacientesPorTipoAfiliacion()
+        public void calcularPorcentajePacientesPorTipoAfiliacion()
         {
-            return double;
+            
         }
     }
 }

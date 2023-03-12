@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace HistoriaClinica_ProyectoDeAula
 {
-    internal class Ejecutar
+    public class Ejecutar
     {
+        
+        public static void Main()
+        {
+            Consola consola = new Consola();
+            consola.ejecutar();
+        }
+
         
     }
 }

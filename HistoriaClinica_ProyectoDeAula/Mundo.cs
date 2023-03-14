@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json.Serialization;
 
 namespace HistoriaClinica_ProyectoDeAula
 {
@@ -224,19 +225,32 @@ namespace HistoriaClinica_ProyectoDeAula
 
             return porcentajeDePacientes;
         }
-        public void encontrarMayorCosto()
+        public  Persona encontrarMayorCosto()
         {
 
+            var pacienteMayorCosto = listaDePacientes.Max(paciente => paciente);
+            return pacienteMayorCosto;
         }                
-        public void calcularPacientesPorRegimen()
+        public List<double> calcularPacientesPorRegimen()
         {
+            List<double> porcentajes= new List<double>();
             var afiliadosContributivo = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Contributivo").ToList();
             var afiliadosSubsidiado = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Subsidiado").ToList();
-            double porcentajeContributivo = 
+            double porcentajeContributivo = (afiliadosContributivo.Count / listaDePacientes.Count)*100;
+            double porcentajeSubsidiado = (afiliadosSubsidiado.Count / listaDePacientes.Count) * 100;
+            porcentajes.Add(porcentajeContributivo);
+            porcentajes.Add(porcentajeSubsidiado);
+            return porcentajes;
         }
         public void calcularPorcentajePacientesPorTipoAfiliacion()
         {
-            
+            var afiliadosCotizantes = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Cotizante").ToList();
+            var afiliadosBeneficiarios = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Beneficiario").ToList();
+            var porcentajeCotizantes = (afiliadosCotizantes.Count/listaDePacientes.Count)*100;
+            var porcentajeBeneficiarios = (afiliadosBeneficiarios.Count/listaDePacientes.Count)*100;
+            List<double> porcentajes = new List<double> { porcentajeCotizantes, porcentajeBeneficiarios};
+
+
         }
     }
 }

@@ -80,44 +80,87 @@ namespace HistoriaClinica_ProyectoDeAula
         public void ingresarPaciente(Persona nuevoPaciente)
         {
             ListaDePacientes.Add(nuevoPaciente);
-            
+
         }
 
         public void CambiarEPS(Persona paciente, string nuevaEPS)
         {
             paciente.EPS1 = nuevaEPS;
         }
-        
+
         public double calcularPorcentajePacienteSinEnfermedad()
         {
             int cantidadDePacientes = 0;
             int cantidadDePacientes0Enfermedades = 0;
             double porcentajePacientesSinEnfermedades = 0f;
-            foreach(Persona paciente in listaDePacientes)
+            foreach (Persona paciente in listaDePacientes)
             {
                 cantidadDePacientes++;
-                if(paciente.CantidadEnfermedades == 0)
+                if (paciente.CantidadEnfermedades == 0)
                 {
                     cantidadDePacientes0Enfermedades++;
-                }             
+                }
             }
             porcentajePacientesSinEnfermedades = (cantidadDePacientes0Enfermedades * 100) / cantidadDePacientes;
             return porcentajePacientesSinEnfermedades;
         }
 
-        public void calcularTotalCostosEPS()
+        public List<double> calcularTotalCostosPorEPS()
         {
-            
+            List<double> costosEps = new List<double>();
+            var afiliadosSura = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Sura").ToList();
+            var afiliadosNuevaEps = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Nueva EPS").ToList();
+            var afiliadosSaludtotal = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Salud Total").ToList();
+            var afiliadosSanitas = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Sanitas").ToList();
+            var afiliadosSavia = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Savia").ToList();
+
+            var costoSura = afiliadosSura.Sum(afiliado => afiliado.CostosTratamientos);
+            var costoNuevaEps = afiliadosNuevaEps.Sum(afiliado => afiliado.CostosTratamientos);
+            var costoSaludTotal = afiliadosSaludtotal.Sum(afiliado => afiliado.CostosTratamientos);
+            var costoSanitas = afiliadosSanitas.Sum(afiliado => afiliado.CostosTratamientos);
+            var costoSavia = afiliadosSavia.Sum(afiliado => afiliado.CostosTratamientos);
+
+            costosEps.Add(costoSura);
+            costosEps.Add(costoNuevaEps);
+            costosEps.Add(costoSaludTotal);
+            costosEps.Add(costoSanitas);
+            costosEps.Add(costoSavia);
+            return costosEps;
+
+
+
+
+
         }
 
-        public void calcularPorcentajeCostosEPS()
+        public List<double> calcularPorcentajeCostosPorEPS()
         {
-         
+            List<double> costosEps = calcularTotalCostosPorEPS();
+
+            double costoSura = costosEps[0];
+            double costoNuevaEps = costosEps[1];
+            double costoSaludTotal = costosEps[2];
+            double costoSanitas = costosEps[3];
+            double costoSavia = costosEps[4];
+            double TotalCosto = costosEps.Sum();
+            double porcentajeSura = (costoSura / TotalCosto) * 100;
+            double porcentajeNuevaEps = (costoNuevaEps / TotalCosto) * 100;
+            double porcentajeSaludTotal = (costoSaludTotal / TotalCosto) * 100;
+            double porcentajeSanitas = (costoSanitas / TotalCosto) * 100;
+            double porcentajeSavia = (costoSavia / TotalCosto) * 100;
+
+            List<double> costosPorcentajes = new List<double> { porcentajeSura, porcentajeNuevaEps, porcentajeSaludTotal, porcentajeSanitas,porcentajeSavia};
+            return costosPorcentajes;
+
         }
-        public void calcularTotalPacientes()
+        public double calcularTotalPacientesCancer()
         {
-            
-                
+            List<double> pacientesConCancer = new List<double>();
+            var afiliadosCancer = listaDePacientes.Where(afiliado => afiliado.EnfermedadRelevante == "Cancer").ToList();
+            double numeroPacientes = listaDePacientes.Count;
+            double porcentajeConCancer = (afiliadosCancer.Count / listaDePacientes.Count) *100;
+
+            return porcentajeConCancer;
         }
         public void calcularPorcentajesPorEdad()
         {

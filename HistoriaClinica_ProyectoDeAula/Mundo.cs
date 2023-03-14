@@ -127,10 +127,6 @@ namespace HistoriaClinica_ProyectoDeAula
             costosEps.Add(costoSavia);
             return costosEps;
 
-
-
-
-
         }
 
         public List<double> calcularPorcentajeCostosPorEPS()

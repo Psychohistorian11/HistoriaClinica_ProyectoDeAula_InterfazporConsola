@@ -195,7 +195,9 @@ namespace HistoriaClinica_ProyectoDeAula
         }                
         public void calcularPacientesPorRegimen()
         {
-          
+            var afiliadosContributivo = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Contributivo").ToList();
+            var afiliadosSubsidiado = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Subsidiado").ToList();
+            double porcentajeContributivo = 
         }
         public void calcularPorcentajePacientesPorTipoAfiliacion()
         {

@@ -242,13 +242,14 @@ namespace HistoriaClinica_ProyectoDeAula
             porcentajes.Add(porcentajeSubsidiado);
             return porcentajes;
         }
-        public void calcularPorcentajePacientesPorTipoAfiliacion()
+        public List<double> calcularPorcentajePacientesPorTipoAfiliacion()
         {
             var afiliadosCotizantes = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Cotizante").ToList();
             var afiliadosBeneficiarios = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Beneficiario").ToList();
             var porcentajeCotizantes = (afiliadosCotizantes.Count/listaDePacientes.Count)*100;
             var porcentajeBeneficiarios = (afiliadosBeneficiarios.Count/listaDePacientes.Count)*100;
             List<double> porcentajes = new List<double> { porcentajeCotizantes, porcentajeBeneficiarios};
+            return porcentajes;
 
 
         }

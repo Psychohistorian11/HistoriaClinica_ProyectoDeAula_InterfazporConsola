@@ -88,9 +88,21 @@ namespace HistoriaClinica_ProyectoDeAula
             paciente.EPS1 = nuevaEPS;
         }
         
-        public void calcularPorcentajePacienteSinEnfermedad()
+        public double calcularPorcentajePacienteSinEnfermedad()
         {
-            
+            int cantidadDePacientes = 0;
+            int cantidadDePacientes0Enfermedades = 0;
+            double porcentajePacientesSinEnfermedades = 0f;
+            foreach(Persona paciente in listaDePacientes)
+            {
+                cantidadDePacientes++;
+                if(paciente.CantidadEnfermedades == 0)
+                {
+                    cantidadDePacientes0Enfermedades++;
+                }             
+            }
+            porcentajePacientesSinEnfermedades = (cantidadDePacientes0Enfermedades * 100) / cantidadDePacientes;
+            return porcentajePacientesSinEnfermedades;
         }
 
         public void calcularTotalCostosEPS()
@@ -98,10 +110,6 @@ namespace HistoriaClinica_ProyectoDeAula
             
         }
 
-        public void cambiarEPS()
-        {
-
-        }
         public void calcularPorcentajeCostosEPS()
         {
          

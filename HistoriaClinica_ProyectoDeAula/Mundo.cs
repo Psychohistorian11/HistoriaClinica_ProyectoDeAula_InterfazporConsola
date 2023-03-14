@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace HistoriaClinica_ProyectoDeAula
@@ -158,7 +159,7 @@ namespace HistoriaClinica_ProyectoDeAula
 
             return porcentajeConCancer;
         }
-        public void calcularPorcentajesPorEdad()
+        public List<int> calcularPorcentajesPorEdad()
         {
             int cantidadDePacientes = listaDePacientes.Count;
             int cantidadNiños = 0;
@@ -166,9 +167,12 @@ namespace HistoriaClinica_ProyectoDeAula
             int cantidadJovenes = 0;
             int cantidadAdultos = 0;
             int cantidadAdultoMayor = 0;
-            int cantidadAncianoMayor = 0;
-          foreach(Persona paciente in listaDePacientes)
+            int cantidadAnciano = 0;
+            List<int> porcentajeDePacientes = new List<int>();
+            
+            foreach (Persona paciente in listaDePacientes)
             {
+                
                 
                 DateTime fecha = paciente.FechaNacimiento;
                 int edad = DateTime.Today.Year - fecha.Year;
@@ -184,10 +188,41 @@ namespace HistoriaClinica_ProyectoDeAula
                 }
                 if(edad >= 12 && edad < 18)
                 {
-
+                    cantidadAdolescente++;
                 }
+                if(edad >= 18 && edad < 30)
+                {
+                    cantidadJovenes++;
+                }
+                if(edad >= 30 && edad < 55)
+                {
+                    cantidadAdultos++;
+                }
+                if(edad >= 55 && edad < 75)
+                {
+                    cantidadAdultoMayor++;
+                }
+                if(edad >= 75)
+                {
+                    cantidadAnciano++;
+                }
+
             }
-            
+            int cantidadPorcentajeNiños = (cantidadNiños * 100) / cantidadDePacientes;
+            int cantidadPorcentajeJovenes = (cantidadJovenes * 100) / cantidadDePacientes;
+            int cantidadPorcentajeAdolescente = (cantidadAdolescente * 100) / cantidadDePacientes;
+            int cantidadPorcentajeAdultos = (cantidadAdultos * 100) / cantidadDePacientes;
+            int cantidadPorcentajeAdultoMayor = (cantidadAdultoMayor * 100) / cantidadDePacientes;
+            int cantidadPorcentajeAnciano = (cantidadAnciano * 100) / cantidadDePacientes;
+
+            porcentajeDePacientes.Add(cantidadPorcentajeNiños);
+            porcentajeDePacientes.Add(cantidadPorcentajeJovenes);
+            porcentajeDePacientes.Add(cantidadPorcentajeAdolescente);
+            porcentajeDePacientes.Add(cantidadPorcentajeAdultos);
+            porcentajeDePacientes.Add(cantidadPorcentajeAdultoMayor);
+            porcentajeDePacientes.Add(cantidadPorcentajeAnciano);
+
+            return porcentajeDePacientes;
         }
         public void encontrarMayorCosto()
         {

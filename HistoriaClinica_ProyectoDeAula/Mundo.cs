@@ -121,7 +121,33 @@ namespace HistoriaClinica_ProyectoDeAula
         }
         public void calcularPorcentajesPorEdad()
         {
-          
+            int cantidadDePacientes = listaDePacientes.Count;
+            int cantidadNiños = 0;
+            int cantidadAdolescente = 0;
+            int cantidadJovenes = 0;
+            int cantidadAdultos = 0;
+            int cantidadAdultoMayor = 0;
+            int cantidadAncianoMayor = 0;
+          foreach(Persona paciente in listaDePacientes)
+            {
+                
+                DateTime fecha = paciente.FechaNacimiento;
+                int edad = DateTime.Today.Year - fecha.Year;
+
+                // Se ajusta la edad si aún no ha cumplido años en este año
+                if (DateTime.Today < fecha.AddYears(edad))
+                {
+                    edad--;
+                }
+                if(edad >= 0 && edad < 12)
+                {
+                    cantidadNiños++;
+                }
+                if(edad >= 12 && edad < 18)
+                {
+
+                }
+            }
             
         }
         public void encontrarMayorCosto()

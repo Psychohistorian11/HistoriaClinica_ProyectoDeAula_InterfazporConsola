@@ -208,6 +208,7 @@ namespace HistoriaClinica_ProyectoDeAula
                     cantidadAnciano++;
                 }
 
+
             }
             int cantidadPorcentajeNiños = (cantidadNiños * 100) / cantidadDePacientes;
             int cantidadPorcentajeJovenes = (cantidadJovenes * 100) / cantidadDePacientes;

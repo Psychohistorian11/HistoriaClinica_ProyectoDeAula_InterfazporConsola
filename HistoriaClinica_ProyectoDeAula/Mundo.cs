@@ -110,17 +110,17 @@ namespace HistoriaClinica_ProyectoDeAula
         public List<double> calcularTotalCostosPorEPS()
         {
             List<double> costosEps = new List<double>();
-            var afiliadosSura = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Sura").ToList();
-            var afiliadosNuevaEps = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Nueva EPS").ToList();
-            var afiliadosSaludtotal = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Salud Total").ToList();
-            var afiliadosSanitas = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Sanitas").ToList();
-            var afiliadosSavia = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Savia").ToList();
+            List<Persona>  afiliadosSura = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Sura").ToList();
+            List<Persona> afiliadosNuevaEps = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Nueva EPS").ToList();
+            List<Persona> afiliadosSaludtotal = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Salud Total").ToList();
+            List<Persona> afiliadosSanitas = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Sanitas").ToList();
+            List<Persona> afiliadosSavia = listaDePacientes.Where(afiliado => afiliado.EPS1 == "Savia").ToList();
 
-            var costoSura = afiliadosSura.Sum(afiliado => afiliado.CostosTratamientos);
-            var costoNuevaEps = afiliadosNuevaEps.Sum(afiliado => afiliado.CostosTratamientos);
-            var costoSaludTotal = afiliadosSaludtotal.Sum(afiliado => afiliado.CostosTratamientos);
-            var costoSanitas = afiliadosSanitas.Sum(afiliado => afiliado.CostosTratamientos);
-            var costoSavia = afiliadosSavia.Sum(afiliado => afiliado.CostosTratamientos);
+            double costoSura = afiliadosSura.Sum(afiliado => afiliado.CostosTratamientos);
+            double costoNuevaEps = afiliadosNuevaEps.Sum(afiliado => afiliado.CostosTratamientos);
+            double costoSaludTotal = afiliadosSaludtotal.Sum(afiliado => afiliado.CostosTratamientos);
+            double costoSanitas = afiliadosSanitas.Sum(afiliado => afiliado.CostosTratamientos);
+            double costoSavia = afiliadosSavia.Sum(afiliado => afiliado.CostosTratamientos);
 
             costosEps.Add(costoSura);
             costosEps.Add(costoNuevaEps);
@@ -153,7 +153,7 @@ namespace HistoriaClinica_ProyectoDeAula
         }
         public double calcularTotalPacientesCancer()
         {
-            var afiliadosCancer = listaDePacientes.Where(afiliado => afiliado.EnfermedadRelevante == "Cancer" || afiliado.EnfermedadRelevante == "cancer" || afiliado.EnfermedadRelevante == " cancer" || afiliado.EnfermedadRelevante == " cancer ").ToList();
+            List<Persona> afiliadosCancer = listaDePacientes.Where(afiliado => afiliado.EnfermedadRelevante == "Cancer" || afiliado.EnfermedadRelevante == "cancer" || afiliado.EnfermedadRelevante == " cancer" || afiliado.EnfermedadRelevante == " cancer ").ToList();
             double numeroPacientes = Convert.ToDouble(afiliadosCancer.Count());
             
             return numeroPacientes;
@@ -227,17 +227,17 @@ namespace HistoriaClinica_ProyectoDeAula
         public  Persona encontrarMayorCosto()
         {
 
-            var listaCostosPaciente = listaDePacientes.Where(paciente => paciente.CostosTratamientos >0).ToList();
-            var mayor_costo = listaCostosPaciente.Max(paciente => paciente.CostosTratamientos);
-            var paciente = listaCostosPaciente.Where(paciente => paciente.CostosTratamientos == mayor_costo).ToList();
+            List<Persona> listaCostosPaciente = listaDePacientes.Where(paciente => paciente.CostosTratamientos >0).ToList();
+            double mayor_costo = listaCostosPaciente.Max(paciente => paciente.CostosTratamientos);
+            List<Persona> paciente = listaCostosPaciente.Where(paciente => paciente.CostosTratamientos == mayor_costo).ToList();
             return paciente[0];
 
         }                
         public List<double> calcularPacientesPorRegimen()
         {
             List<double> porcentajes= new List<double>();
-            var afiliadosContributivo = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Contributivo").ToList();
-            var afiliadosSubsidiado = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Subsidiado").ToList();
+            List<Persona> afiliadosContributivo = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Contributivo").ToList();
+            List<Persona> afiliadosSubsidiado = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Subsidiado").ToList();
             double porcentajeContributivo = (Convert.ToDouble(afiliadosContributivo.Count) / Convert.ToDouble(listaDePacientes.Count))*100;
             double porcentajeSubsidiado = (Convert.ToDouble(afiliadosSubsidiado.Count) / Convert.ToDouble(listaDePacientes.Count)) * 100;
             porcentajes.Add(porcentajeContributivo);
@@ -246,10 +246,10 @@ namespace HistoriaClinica_ProyectoDeAula
         }
         public List<double> calcularPorcentajePacientesPorTipoAfiliacion()
         {
-            var afiliadosCotizantes = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Cotizante").ToList();
-            var afiliadosBeneficiarios = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Beneficiario").ToList();
-            var porcentajeCotizantes = (Convert.ToDouble(afiliadosCotizantes.Count)/Convert.ToDouble(listaDePacientes.Count))*100;
-            var porcentajeBeneficiarios = (Convert.ToDouble(afiliadosBeneficiarios.Count) /Convert.ToDouble(listaDePacientes.Count))*100;
+            List<Persona> afiliadosCotizantes = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Cotizante").ToList();
+            List<Persona> afiliadosBeneficiarios = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Beneficiario").ToList();
+            double porcentajeCotizantes = (Convert.ToDouble(afiliadosCotizantes.Count)/Convert.ToDouble(listaDePacientes.Count))*100;
+            double  porcentajeBeneficiarios = (Convert.ToDouble(afiliadosBeneficiarios.Count) /Convert.ToDouble(listaDePacientes.Count))*100;
             List<double> porcentajes = new List<double> { porcentajeCotizantes, porcentajeBeneficiarios};
             return porcentajes;
 

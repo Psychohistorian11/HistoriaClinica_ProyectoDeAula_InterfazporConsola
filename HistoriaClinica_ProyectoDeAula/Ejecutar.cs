@@ -8,13 +8,10 @@ namespace HistoriaClinica_ProyectoDeAula
 {
     public class Ejecutar
     {
-        
         public static void Main()
         {
             Consola consola = new Consola();
             consola.ejecutar();
         }
-
-        
     }
 }

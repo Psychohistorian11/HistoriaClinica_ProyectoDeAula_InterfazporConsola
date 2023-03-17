@@ -153,23 +153,21 @@ namespace HistoriaClinica_ProyectoDeAula
         }
         public double calcularTotalPacientesCancer()
         {
-            List<double> pacientesConCancer = new List<double>();
-            var afiliadosCancer = listaDePacientes.Where(afiliado => afiliado.EnfermedadRelevante == "Cancer").ToList();
-            double numeroPacientes = listaDePacientes.Count;
-            double porcentajeConCancer = (afiliadosCancer.Count / listaDePacientes.Count) *100;
-
-            return porcentajeConCancer;
+            var afiliadosCancer = listaDePacientes.Where(afiliado => afiliado.EnfermedadRelevante == "Cancer" || afiliado.EnfermedadRelevante == "cancer" || afiliado.EnfermedadRelevante == " cancer" || afiliado.EnfermedadRelevante == " cancer ").ToList();
+            double numeroPacientes = Convert.ToDouble(afiliadosCancer.Count());
+            
+            return numeroPacientes;
         }
-        public List<int> calcularPorcentajesPorEdad()
+        public List<double> calcularPorcentajesPorEdad()
         {
-            int cantidadDePacientes = listaDePacientes.Count;
-            int cantidadNiños = 0;
-            int cantidadAdolescente = 0;
-            int cantidadJovenes = 0;
-            int cantidadAdultos = 0;
-            int cantidadAdultoMayor = 0;
-            int cantidadAnciano = 0;
-            List<int> porcentajeDePacientes = new List<int>();
+            double cantidadDePacientes = Convert.ToDouble(listaDePacientes.Count);
+            double cantidadNiños = 0;
+            double cantidadAdolescente = 0;
+            double cantidadJovenes = 0;
+            double cantidadAdultos = 0;
+            double cantidadAdultoMayor = 0;
+            double cantidadAnciano = 0;
+            List<double> porcentajeDePacientes = new List<double>();
             
             foreach (Persona paciente in listaDePacientes)
             {
@@ -210,12 +208,12 @@ namespace HistoriaClinica_ProyectoDeAula
 
 
             }
-            int cantidadPorcentajeNiños = (cantidadNiños * 100) / cantidadDePacientes;
-            int cantidadPorcentajeJovenes = (cantidadJovenes * 100) / cantidadDePacientes;
-            int cantidadPorcentajeAdolescente = (cantidadAdolescente * 100) / cantidadDePacientes;
-            int cantidadPorcentajeAdultos = (cantidadAdultos * 100) / cantidadDePacientes;
-            int cantidadPorcentajeAdultoMayor = (cantidadAdultoMayor * 100) / cantidadDePacientes;
-            int cantidadPorcentajeAnciano = (cantidadAnciano * 100) / cantidadDePacientes;
+            double cantidadPorcentajeNiños = (cantidadNiños * 100) / cantidadDePacientes;
+            double cantidadPorcentajeJovenes = (cantidadJovenes * 100) / cantidadDePacientes;
+            double cantidadPorcentajeAdolescente = (cantidadAdolescente * 100) / cantidadDePacientes;
+            double cantidadPorcentajeAdultos = (cantidadAdultos * 100) / cantidadDePacientes;
+            double cantidadPorcentajeAdultoMayor = (cantidadAdultoMayor * 100) / cantidadDePacientes;
+            double cantidadPorcentajeAnciano = (cantidadAnciano * 100) / cantidadDePacientes;
 
             porcentajeDePacientes.Add(cantidadPorcentajeNiños);
             porcentajeDePacientes.Add(cantidadPorcentajeJovenes);
@@ -229,16 +227,19 @@ namespace HistoriaClinica_ProyectoDeAula
         public  Persona encontrarMayorCosto()
         {
 
-            var pacienteMayorCosto = listaDePacientes.Max(paciente => paciente);
-            return pacienteMayorCosto;
+            var listaCostosPaciente = listaDePacientes.Where(paciente => paciente.CostosTratamientos >0).ToList();
+            var mayor_costo = listaCostosPaciente.Max(paciente => paciente.CostosTratamientos);
+            var paciente = listaCostosPaciente.Where(paciente => paciente.CostosTratamientos == mayor_costo).ToList();
+            return paciente[0];
+
         }                
         public List<double> calcularPacientesPorRegimen()
         {
             List<double> porcentajes= new List<double>();
             var afiliadosContributivo = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Contributivo").ToList();
             var afiliadosSubsidiado = listaDePacientes.Where(afiliado => afiliado.TipoRegimen == "Subsidiado").ToList();
-            double porcentajeContributivo = (afiliadosContributivo.Count / listaDePacientes.Count)*100;
-            double porcentajeSubsidiado = (afiliadosSubsidiado.Count / listaDePacientes.Count) * 100;
+            double porcentajeContributivo = (Convert.ToDouble(afiliadosContributivo.Count) / Convert.ToDouble(listaDePacientes.Count))*100;
+            double porcentajeSubsidiado = (Convert.ToDouble(afiliadosSubsidiado.Count) / Convert.ToDouble(listaDePacientes.Count)) * 100;
             porcentajes.Add(porcentajeContributivo);
             porcentajes.Add(porcentajeSubsidiado);
             return porcentajes;
@@ -247,9 +248,11 @@ namespace HistoriaClinica_ProyectoDeAula
         {
             var afiliadosCotizantes = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Cotizante").ToList();
             var afiliadosBeneficiarios = listaDePacientes.Where(paciente => paciente.TipoAfiliacion == "Beneficiario").ToList();
-            var porcentajeCotizantes = (afiliadosCotizantes.Count/listaDePacientes.Count)*100;
-            var porcentajeBeneficiarios = (afiliadosBeneficiarios.Count/listaDePacientes.Count)*100;
+            var porcentajeCotizantes = (Convert.ToDouble(afiliadosCotizantes.Count)/Convert.ToDouble(listaDePacientes.Count))*100;
+            var porcentajeBeneficiarios = (Convert.ToDouble(afiliadosBeneficiarios.Count) /Convert.ToDouble(listaDePacientes.Count))*100;
             List<double> porcentajes = new List<double> { porcentajeCotizantes, porcentajeBeneficiarios};
+            Console.WriteLine(porcentajeCotizantes);
+            Console.WriteLine("=======",porcentajeBeneficiarios);
             return porcentajes;
 
 

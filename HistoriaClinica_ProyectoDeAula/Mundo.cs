@@ -251,8 +251,6 @@ namespace HistoriaClinica_ProyectoDeAula
             var porcentajeCotizantes = (Convert.ToDouble(afiliadosCotizantes.Count)/Convert.ToDouble(listaDePacientes.Count))*100;
             var porcentajeBeneficiarios = (Convert.ToDouble(afiliadosBeneficiarios.Count) /Convert.ToDouble(listaDePacientes.Count))*100;
             List<double> porcentajes = new List<double> { porcentajeCotizantes, porcentajeBeneficiarios};
-            Console.WriteLine(porcentajeCotizantes);
-            Console.WriteLine("=======",porcentajeBeneficiarios);
             return porcentajes;
 
 

@@ -245,6 +245,7 @@ namespace HistoriaClinica_ProyectoDeAula
                             clinica.CambiarEPS(paciente, nuevaEPS);
                             Console.WriteLine("* El paciente Identificado con el numero "+ paciente.Identificacion + 
                                               " ahora hace parte de la EPS: "+ paciente.EPS1);
+                            Console.ReadKey();
                             BackMenu();
                         }
                     }
@@ -252,6 +253,7 @@ namespace HistoriaClinica_ProyectoDeAula
                     {
                         Console.WriteLine("* La persona ha estado en el sistema de salud por menos de 3 meses. ");
                         Console.WriteLine("  No se puede realizar el cambio de EPS ");
+                        Console.ReadKey();
                         BackMenu();
 
                     }
@@ -260,6 +262,7 @@ namespace HistoriaClinica_ProyectoDeAula
                 else
                 {
                     Console.WriteLine("* El usuario actualmente no se encuentra en el sistema ");
+                    Console.ReadKey();
                     BackMenu();
                 }
             }

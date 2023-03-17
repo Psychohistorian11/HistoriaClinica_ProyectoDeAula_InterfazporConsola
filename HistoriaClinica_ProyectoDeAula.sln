@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoriaClinica_ProyectoDeAula", "HistoriaClinica_ProyectoDeAula\HistoriaClinica_ProyectoDeAula.csproj", "{CAFCC551-A444-4649-898E-03ED9996C28B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistoriaClinica_ProyectoDeAula", "HistoriaClinica_ProyectoDeAula\HistoriaClinica_ProyectoDeAula.csproj", "{CAFCC551-A444-4649-898E-03ED9996C28B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UML", "UML", "{0AA700F0-A279-4865-8C1F-9A5A8BE5D504}"
+	ProjectSection(SolutionItems) = preProject
+		HistoriaClinica_ProyectoDeAula\UML_Avance1.png = HistoriaClinica_ProyectoDeAula\UML_Avance1.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
